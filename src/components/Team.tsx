@@ -4,9 +4,9 @@ import React from 'react';
 const Team: React.FC = () => {
     // Mock data
     const team = [
-        { name: "Blake Bertuccelli-Booth", role: "Program Lead" },
-        { name: "Stefin Pasternak", role: "Program Lead" },
-        { name: "Mary Hubbard", role: "Advisor" }
+        { name: "Blake Bertuccelli-Booth", role: "Program Lead", affiliation: "UIC" },
+        { name: "Stefin Pasternak", role: "Program Lead", affiliation: "UIC" },
+        { name: "Mary Hubbard", role: "Advisor", affiliation: "WordPress" }
     ];
 
     return (
@@ -29,7 +29,10 @@ const Team: React.FC = () => {
                             </div>
                             <div className="text-center">
                                 <h3 className="text-xl font-bold text-white group-hover:text-gray-300 transition-colors">{member.name}</h3>
-                                <p className="text-sm text-gray-500 mt-2 font-medium tracking-wide uppercase">{member.role}</p>
+                                <div className="flex flex-col gap-1 mt-2">
+                                    <p className="text-sm text-gray-400 font-medium tracking-wide uppercase">{member.role}</p>
+                                    <p className="text-xs text-zinc-500 font-semibold tracking-widest uppercase">{member.affiliation}</p>
+                                </div>
                             </div>
                         </div>
                     ))}
