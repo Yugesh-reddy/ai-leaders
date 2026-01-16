@@ -5,8 +5,8 @@ const Team: React.FC = () => {
     // Mock data
     const team = [
         { name: "Blake Bertuccelli-Booth", role: "Program Lead" },
-        { name: "Stefin Pasternak", role: "AI Instruction" },
-        { name: "Mary Hubbard", role: "Operations" }
+        { name: "Stefin Pasternak", role: "Program Lead" },
+        { name: "Mary Hubbard", role: "Advisor" }
     ];
 
     return (
