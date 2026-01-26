@@ -6,6 +6,12 @@ const GithubIcon = ({ className }: { className?: string }) => (
     </svg>
 );
 
+const SlackIcon = ({ className }: { className?: string }) => (
+    <svg viewBox="0 0 16 16" fill="currentColor" className={className} aria-hidden="true">
+        <path d="M3.362 10.11c0 .926-.756 1.681-1.681 1.681S0 11.036 0 10.111.756 8.43 1.68 8.43h1.682zm.846 0c0-.924.756-1.68 1.681-1.68s1.681.756 1.681 1.68v4.21c0 .924-.756 1.68-1.68 1.68a1.685 1.685 0 0 1-1.682-1.68zM5.89 3.362c-.926 0-1.682-.756-1.682-1.681S4.964 0 5.89 0s1.68.756 1.68 1.68v1.682zm0 .846c.924 0 1.68.756 1.68 1.681S6.814 7.57 5.89 7.57H1.68C.757 7.57 0 6.814 0 5.89c0-.926.756-1.682 1.68-1.682zm6.749 1.682c0-.926.755-1.682 1.68-1.682S16 4.964 16 5.889s-.756 1.681-1.68 1.681h-1.681zm-.848 0c0 .924-.755 1.68-1.68 1.68A1.685 1.685 0 0 1 8.43 5.89V1.68C8.43.757 9.186 0 10.11 0c.926 0 1.681.756 1.681 1.68zm-1.681 6.748c.926 0 1.682.756 1.682 1.681S11.036 16 10.11 16s-1.681-.756-1.681-1.68v-1.682h1.68zm0-.847c-.924 0-1.68-.755-1.68-1.68s.756-1.681 1.68-1.681h4.21c.924 0 1.68.756 1.68 1.68 0 .926-.756 1.681-1.68 1.681z" />
+    </svg>
+);
+
 const OpenSourceCallout: React.FC = () => {
     return (
         <section className="relative bg-zinc-950 border-y border-white/5 py-12 overflow-hidden">
@@ -40,16 +46,27 @@ const OpenSourceCallout: React.FC = () => {
                             Join our community of builders.
                         </p>
                     </div>
-                    <a
-                        href="https://github.com/1111philo/ai-leaders"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="group relative inline-flex items-center gap-2 bg-white text-black px-6 py-2.5 rounded-full text-sm font-bold transition-all hover:scale-105 active:scale-95 whitespace-nowrap"
-                    >
-                        <GithubIcon className="w-4 h-4 transition-transform group-hover:rotate-12" />
-                        <span>Star our GitHub</span>
-                        <div className="absolute inset-0 rounded-full bg-white blur-md opacity-0 group-hover:opacity-20 transition-opacity"></div>
-                    </a>
+                    <div className="flex flex-col sm:flex-row items-center gap-4">
+                        <a
+                            href="https://join.slack.com/t/1111philo/shared_invite/zt-2gmnevnx3-qR6119iBjUFxS4BgP8wXzA"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="group relative inline-flex items-center gap-2 bg-[#4A154B] text-white px-6 py-2.5 rounded-full text-sm font-bold transition-all hover:scale-105 active:scale-95 whitespace-nowrap"
+                        >
+                            <SlackIcon className="w-4 h-4 transition-transform group-hover:rotate-12" />
+                            <span>Join our Slack</span>
+                        </a>
+                        <a
+                            href="https://github.com/1111philo/ai-leaders"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="group relative inline-flex items-center gap-2 bg-white text-black px-6 py-2.5 rounded-full text-sm font-bold transition-all hover:scale-105 active:scale-95 whitespace-nowrap"
+                        >
+                            <GithubIcon className="w-4 h-4 transition-transform group-hover:rotate-12" />
+                            <span>Star our GitHub</span>
+                            <div className="absolute inset-0 rounded-full bg-white blur-md opacity-0 group-hover:opacity-20 transition-opacity"></div>
+                        </a>
+                    </div>
                 </div>
             </div>
         </section>

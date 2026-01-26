@@ -57,7 +57,7 @@ const ApplicationForm: React.FC = () => {
                                 <p className="text-xs text-gray-500 italic mb-2">{metric.description}</p>
                                 <div className="grid grid-cols-3 gap-3">
                                     {['Beginner', 'Intermediate', 'Advanced'].map((level) => (
-                                        <label key={level} className="flex items-center justify-center p-2 rounded border border-zinc-800 hover:bg-zinc-900 cursor-pointer transition-colors has-[:checked]:bg-white has-[:checked]:text-black has-[:checked]:border-white">
+                                        <label key={level} className="flex items-center justify-center p-2 rounded border border-zinc-800 hover:bg-zinc-900 cursor-pointer transition-colors has-[:checked]:bg-white has-[:checked]:text-black has-[:checked]:border-white has-[:focus-visible]:ring-2 has-[:focus-visible]:ring-white has-[:focus-visible]:ring-offset-2 has-[:focus-visible]:ring-offset-black">
                                             <input type="radio" name={metric.id} value={level} className="sr-only" />
                                             <span className="text-xs font-medium uppercase tracking-wider">{level}</span>
                                         </label>
