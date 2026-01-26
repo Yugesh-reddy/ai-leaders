@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="none">
+    <style>
+        .p { stroke: #18181b; transition: stroke 0.3s ease; }
+        .f { fill: #18181b; transition: fill 0.3s ease; }
+        @media (prefers-color-scheme: dark) {
+            .p { stroke: #ffffff; }
+            .f { fill: #ffffff; }
+        }
+    </style>
+    <!-- Outer 'A' Frame / Peak -->
+    <path class="p" d="M16 4L4 26H28L16 4Z" stroke-width="2.5" stroke-linejoin="round"/>
+    
+    <!-- Central AI Core / Intelligence -->
+    <circle class="p" cx="16" cy="17" r="4.5" stroke-width="2"/>
+    <circle class="f" cx="16" cy="17" r="1.5"/>
+    
+    <!-- Neural Connections representing Leadership pathways -->
+    <path class="p" d="M16 4V12.5" stroke-width="2" stroke-linecap="round"/>
+    <path class="p" d="M9 22.5L12.5 20.5" stroke-width="2" stroke-linecap="round"/>
+    <path class="p" d="M23 22.5L19.5 20.5" stroke-width="2" stroke-linecap="round"/>
+</svg>
