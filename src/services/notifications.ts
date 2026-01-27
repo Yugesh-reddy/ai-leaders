@@ -104,26 +104,19 @@ export const sendNotification = async (data: NotificationData): Promise<boolean>
             ]
         };
 
-        const response = await fetch(webhookUrl, {
+        // Use no-cors mode to bypass CORS restrictions for client-side requests.
+        // Note: This results in an opaque response, so we can't check response.ok or status.
+        // We assume success if the fetch doesn't throw.
+        await fetch(webhookUrl, {
             method: 'POST',
-            // Slack webhooks usually expect simple JSON body.
-            // 'no-cors' mode might be needed if calling directly from browser due to CORS,
-            // but standard Slack webhooks usually don't support CORS for direct browser calls securely without proxy.
-            // However, Zapier webhooks often do allow CORS.
-            // Assuming the user might use Zapier or a proxy. IF direct Slack, might fail CORS in browser.
-            // To be safe for Zapier/modern hooks, usually standard POST is fine.
-            // If CORS is an issue, we'd need a backend, but for this "client-side only" app request, we try best effort.
+            mode: 'no-cors',
             headers: {
-                'Content-Type': 'application/json' // pure text/plain is sometimes safer for "no-cors" but we want json
+                'Content-Type': 'application/x-www-form-urlencoded' // Slack accepts this and parses the body
             },
             body: JSON.stringify(payload)
         });
 
-        if (!response.ok) {
-            console.error('Failed to send notification:', response.statusText);
-            return false;
-        }
-
+        // With no-cors, we can't verify success, but it avoids the browser blocking the request.
         return true;
     } catch (error) {
         console.error('Error sending notification:', error);
