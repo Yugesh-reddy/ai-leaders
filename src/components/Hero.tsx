@@ -1,5 +1,6 @@
 
 import React from 'react';
+import { motion } from 'framer-motion';
 
 const Hero: React.FC = () => {
     return (
@@ -23,15 +24,80 @@ const Hero: React.FC = () => {
                 </p>
 
                 <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-                    <a
-                        href="#apply"
-                        className="w-full sm:w-auto px-8 py-4 bg-white text-black font-semibold rounded-lg hover:bg-gray-200 transition-all transform hover:scale-105"
-                    >
-                        Start Your Application
-                    </a>
+                    <div className="w-full sm:w-auto pb-1">
+                        <motion.a
+                            href="#apply"
+                            initial="initial"
+                            whileHover="hover"
+                            whileTap="tap"
+                            variants={{
+                                initial: { y: 0, opacity: 1, boxShadow: "0 4px 0 0 #1e1b4b" },
+                                hover: { scale: 1 },
+                                tap: {
+                                    y: 4,
+                                    boxShadow: "0 0 0 0 #1e1b4b",
+                                    opacity: 0.9,
+                                    transition: { duration: 0.05 }
+                                }
+                            }}
+                            className="group relative w-full sm:w-auto px-10 py-5 font-black rounded-2xl border-t border-white/20 shadow-2xl overflow-hidden flex items-center justify-center cursor-pointer"
+                        >
+                            {/* 1. Pulsing Multi-color Glow (Behind) */}
+                            <motion.div
+                                className="absolute -inset-4 z-0 rounded-3xl blur-2xl opacity-40 pointer-events-none"
+                                animate={{
+                                    background: [
+                                        "radial-gradient(circle, rgba(59, 130, 246, 0.3) 0%, transparent 70%)",
+                                        "radial-gradient(circle, rgba(168, 85, 247, 0.3) 0%, transparent 70%)",
+                                        "radial-gradient(circle, rgba(6, 182, 212, 0.3) 0%, transparent 70%)",
+                                        "radial-gradient(circle, rgba(59, 130, 246, 0.3) 0%, transparent 70%)",
+                                    ],
+                                }}
+                                transition={{ duration: 6, repeat: Infinity, ease: "linear" }}
+                            />
+
+                            {/* 2. Liquid Gradient Base */}
+                            <motion.div
+                                className="absolute -inset-[100%] z-0 bg-[linear-gradient(45deg,#1e40af,#3730a3,#6b21a8,#3730a3,#1e40af)]"
+                                style={{ backgroundSize: "400% 400%" }}
+                                animate={{
+                                    backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"],
+                                }}
+                                transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
+                            />
+
+                            {/* 3. Surface Shimmer */}
+                            <motion.div
+                                className="absolute inset-0 z-1 w-[200%] h-full bg-gradient-to-r from-transparent via-white/10 to-transparent"
+                                animate={{ x: ["-100%", "100%"] }}
+                                transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
+                            />
+
+                            {/* 4. Top Polish */}
+                            <div className="absolute inset-0 z-2 bg-gradient-to-b from-white/5 to-transparent h-1/2 pointer-events-none" />
+
+                            {/* 5. Text Content */}
+                            <span className="relative z-10 text-white uppercase text-xs tracking-[0.3em] flex items-center gap-3 drop-shadow-[0_2px_4px_rgba(0,0,0,0.5)]">
+                                Start Your Application
+                                <motion.svg
+                                    className="w-4 h-4"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    viewBox="0 0 24 24"
+                                    variants={{
+                                        initial: { x: 0 },
+                                        hover: { x: 5 }
+                                    }}
+                                    transition={{ type: "spring", stiffness: 400, damping: 10 }}
+                                >
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                                </motion.svg>
+                            </span>
+                        </motion.a>
+                    </div>
                     <a
                         href="#about"
-                        className="w-full sm:w-auto px-8 py-4 bg-transparent border border-white/20 text-white font-semibold rounded-lg hover:bg-white/5 transition-all"
+                        className="w-full sm:w-auto px-10 py-5 bg-transparent border border-white/20 text-white font-black rounded-2xl hover:bg-white/5 transition-all uppercase text-xs tracking-[0.2em] flex items-center justify-center"
                     >
                         Learn More
                     </a>

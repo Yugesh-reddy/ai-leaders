@@ -38,8 +38,8 @@ const FAQ: React.FC = () => {
             question: "How do I apply and how are students selected?",
             answer: (
                 <ol className="list-decimal list-inside space-y-2">
-                    <li>Apply at AI-Leaders.org — you'll immediately learn if you're invited to a 15-minute 1-on-1 interview.</li>
-                    <li>Following the interviews, 80 students will be selected to enter a provisional 18-hour Generative AI + AI Literacy course.</li>
+                    <li>Apply at AI-Leaders.org — we'll evaluate your submission based on curiosity, clarity, and motivation.</li>
+                    <li>By March 1, 2026, 80 students will be selected to enter a provisional 18-hour Generative AI + AI Literacy course.</li>
                     <li>From that provisional course, 40 students will be chosen for direct living-wage WordPress job placement with ongoing cohort-leader support.</li>
                 </ol>
             )

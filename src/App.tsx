@@ -8,17 +8,23 @@ import Advisors from './components/Advisors';
 import OpenSourceCallout from './components/OpenSourceCallout';
 import FAQ from './components/FAQ';
 
+import { GoogleReCaptchaProvider } from 'react-google-recaptcha-v3';
+
 function App() {
+  const recaptchaKey = import.meta.env.VITE_RECAPTCHA_SITE_KEY;
+
   return (
-    <Layout>
-      <Hero />
-      <Partners />
-      <About />
-      <Advisors />
-      <OpenSourceCallout />
-      <FAQ />
-      <ApplicationForm />
-    </Layout>
+    <GoogleReCaptchaProvider reCaptchaKey={recaptchaKey || ''}>
+      <Layout>
+        <Hero />
+        <Partners />
+        <About />
+        <Advisors />
+        <OpenSourceCallout />
+        <FAQ />
+        <ApplicationForm />
+      </Layout>
+    </GoogleReCaptchaProvider>
   );
 }
 

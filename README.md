@@ -38,6 +38,26 @@ If you prefer using the command line:
 
     Open `http://localhost:5173` in your browser.
 
+## Environment Setup
+
+To enable the AI assessment features, you need to set up environment variables locally and/or on GitHub.
+
+1.  **Get your API Keys**:
+    *   **Gemini API Key**: [Get a key from Google AI Studio](https://aistudio.google.com/app/apikey).
+    *   **ReCAPTCHA Site Key**: [Register a v3 site](https://www.google.com/recaptcha/admin) (ensure you select reCAPTCHA v3).
+
+2.  **Local Development**:
+    *   Copy `.env.example` to `.env`:
+        ```bash
+        cp .env.example .env
+        ```
+    *   Fill in your keys in `.env`.
+
+3.  **GitHub Pages Deployment**:
+    *   Go to your repository **Settings** > **Secrets and variables** > **Actions**.
+    *   Add repository secrets for `VITE_GEMINI_API_KEY` and `VITE_RECAPTCHA_SITE_KEY`.
+    *   *Note: For Vite apps on GitHub Pages, secrets typically need to be passed during the build process.*
+
 ## Contributing
 
 We welcome contributions! If you're looking for things to contribute, please check out the [Issues on GitHub](https://github.com/1111philo/ai-leaders/issues).
