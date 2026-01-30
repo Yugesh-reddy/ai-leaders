@@ -5,6 +5,7 @@ import type { TransparencyStage } from './EvaluationDimensions';
 import EvaluationDimensions from './EvaluationDimensions';
 import { analyzeApplication } from '../services/ai';
 import { sendNotification, sendOrientationSelection } from '../services/notifications';
+import { addToMailingList } from '../services/campaignMonitor';
 
 
 const ApplicationForm: React.FC = () => {
@@ -12,6 +13,58 @@ const ApplicationForm: React.FC = () => {
     const [isAnalyzing, setIsAnalyzing] = useState(false);
     const [isSubmittingOrientation, setIsSubmittingOrientation] = useState(false);
     const [orientationSelection, setOrientationSelection] = useState<string>('');
+    const [isCopied, setIsCopied] = useState(false);
+
+    const ORIENTATION_DETAILS: Record<string, { start: string, end: string, zoom: string, googleDates: string }> = {
+        'March 18, 11:00 AM – 12:30 PM CST': {
+            start: '20260318T110000',
+            end: '20260318T123000',
+            googleDates: '20260318T160000Z/20260318T173000Z',
+            zoom: 'https://uic.zoom.us/j/86432720876?pwd=o1NMd7ofuR8p2rVm4l8aZwfGNBiaQ2.1'
+        },
+        'March 19, 6:00 PM – 7:30 PM CST': {
+            start: '20260319T180000',
+            end: '20260319T193000',
+            googleDates: '20260319T230000Z/20260320T003000Z',
+            zoom: 'https://uic.zoom.us/j/89904973433?pwd=RFASIn1S2vIfl2Eb7EhbwP19IToX06.1'
+        }
+    };
+
+    const handleCopyLink = (url: string) => {
+        navigator.clipboard.writeText(url);
+        setIsCopied(true);
+        setTimeout(() => setIsCopied(false), 2000);
+    };
+
+    const downloadICS = (option: string) => {
+        const details = ORIENTATION_DETAILS[option];
+        if (!details) return;
+
+        const icsContent = [
+            'BEGIN:VCALENDAR',
+            'VERSION:2.0',
+            'PRODID:-//AI Leaders//Orientation//EN',
+            'BEGIN:VEVENT',
+            'UID:' + Date.now() + '@ai-leaders.org',
+            'DTSTAMP:' + new Date().toISOString().replace(/[-:]/g, '').split('.')[0] + 'Z',
+            `DTSTART:${details.start}`,
+            `DTEND:${details.end}`,
+            'SUMMARY:AI Leaders Orientation',
+            `DESCRIPTION:Zoom Link: ${details.zoom}`,
+            'LOCATION:Zoom',
+            'END:VEVENT',
+            'END:VCALENDAR'
+        ].join('\r\n');
+
+        const blob = new Blob([icsContent], { type: 'text/calendar;charset=utf-8' });
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement('a');
+        link.href = url;
+        link.setAttribute('download', 'AI-Leaders-Orientation.ics');
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+    };
 
 
 
@@ -101,6 +154,12 @@ const ApplicationForm: React.FC = () => {
             // 4. AI Analysis
             const result = await analyzeApplication(formData.response);
 
+            // 5. Marketing Integration (First submission only)
+            if (stage === 0) {
+                // Fire and forget to not block UI
+                addToMailingList(formData.email, formData.firstName, formData.lastName);
+            }
+
             // Update scores and feedback from AI result
             const newScores = {
                 curiosity: result.curiosity,
@@ -178,11 +237,67 @@ const ApplicationForm: React.FC = () => {
                             </svg>
                         </div>
                         <h2 className="text-3xl font-bold text-white mb-4">Registration Confirmed</h2>
-                        <p className="text-gray-300 mb-8 text-lg leading-relaxed">
-                            {orientationSelection === 'I cannot make either of those dates'
-                                ? "Thank you for letting us know. We will be in touch with alternative orientation options soon."
-                                : `We've confirmed your registration for the orientation on ${orientationSelection}. You will receive a calendar invitation shortly.`}
-                        </p>
+                        <div className="text-gray-300 mb-10 text-lg leading-relaxed space-y-4 text-center">
+                            {orientationSelection === 'I cannot make either of those dates' ? (
+                                <p>Thank you for letting us know. We will be in touch with alternative orientation options soon.</p>
+                            ) : (
+                                <>
+                                    <p>We've confirmed your registration for the orientation on <span className="text-white font-bold">{orientationSelection}</span>.</p>
+
+                                    <div className="mt-10 p-6 bg-white/5 border border-white/10 rounded-2xl text-left">
+                                        <h3 className="text-xs font-black uppercase tracking-widest text-gray-500 mb-4">Your Zoom Link</h3>
+                                        <div className="flex flex-col md:flex-row gap-4">
+                                            <code className="flex-grow bg-black/40 border border-white/5 p-4 rounded-xl text-xs text-blue-400 break-all font-mono">
+                                                {ORIENTATION_DETAILS[orientationSelection]?.zoom}
+                                            </code>
+                                            <button
+                                                onClick={() => handleCopyLink(ORIENTATION_DETAILS[orientationSelection]?.zoom)}
+                                                className="shrink-0 px-6 py-4 bg-zinc-800 hover:bg-zinc-700 text-white rounded-xl text-xs font-bold uppercase tracking-widest transition-colors flex items-center justify-center gap-2"
+                                            >
+                                                {isCopied ? (
+                                                    <>
+                                                        <svg className="w-4 h-4 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                                                        </svg>
+                                                        Copied
+                                                    </>
+                                                ) : (
+                                                    <>
+                                                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3" />
+                                                        </svg>
+                                                        Copy URL
+                                                    </>
+                                                )}
+                                            </button>
+                                        </div>
+                                    </div>
+
+                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6">
+                                        <a
+                                            href={`https://www.google.com/calendar/render?action=TEMPLATE&text=AI+Leaders+Orientation&dates=${ORIENTATION_DETAILS[orientationSelection]?.googleDates}&details=Zoom+Link:+${encodeURIComponent(ORIENTATION_DETAILS[orientationSelection]?.zoom)}&location=Zoom`}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            className="p-4 bg-white/5 border border-white/10 hover:bg-white/10 rounded-xl text-xs font-bold uppercase tracking-widest text-center transition-all flex items-center justify-center gap-2"
+                                        >
+                                            <svg className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
+                                                <path d="M19 4h-1V2h-2v2H8V2H6v2H5c-1.11 0-1.99.9-1.99 2L3 20c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V10h14v10z" />
+                                            </svg>
+                                            Add to Google Calendar
+                                        </a>
+                                        <button
+                                            onClick={() => downloadICS(orientationSelection)}
+                                            className="p-4 bg-white/5 border border-white/10 hover:bg-white/10 rounded-xl text-xs font-bold uppercase tracking-widest text-center transition-all flex items-center justify-center gap-2"
+                                        >
+                                            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                                            </svg>
+                                            Download .ics File
+                                        </button>
+                                    </div>
+                                </>
+                            )}
+                        </div>
                     </motion.div>
                 </div>
             </section>
@@ -221,8 +336,8 @@ const ApplicationForm: React.FC = () => {
                                 <h3 className="text-xs font-black uppercase tracking-widest text-gray-500 mb-4">Select an Orientation Date</h3>
 
                                 {[
-                                    'March 18 at 11 AM',
-                                    'March 19 at 6 PM',
+                                    'March 18, 11:00 AM – 12:30 PM CST',
+                                    'March 19, 6:00 PM – 7:30 PM CST',
                                     'I cannot make either of those dates'
                                 ].map((option) => (
                                     <label
