@@ -60,9 +60,7 @@ const ApplicationForm: React.FC = () => {
         } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
             newErrors.email = "Please enter a valid email address (e.g., name@example.com).";
         }
-        if (!formData.linkedin) {
-            newErrors.linkedin = "Your LinkedIn profile URL is required for verification.";
-        } else if (!formData.linkedin.includes('linkedin.com/')) {
+        if (formData.linkedin && !formData.linkedin.includes('linkedin.com/')) {
             newErrors.linkedin = "Please enter a valid LinkedIn URL (must include linkedin.com).";
         }
         if (!formData.affiliation) newErrors.affiliation = "Please select your primary affiliation from the list.";
@@ -345,7 +343,7 @@ const ApplicationForm: React.FC = () => {
                                 </div>
 
                                 <div className="space-y-3">
-                                    <label htmlFor="linkedin" className="text-xs font-black uppercase tracking-widest text-gray-500">LinkedIn Profile URL</label>
+                                    <label htmlFor="linkedin" className="text-xs font-black uppercase tracking-widest text-gray-500">LinkedIn Profile URL (Optional)</label>
                                     <input
                                         type="url"
                                         id="linkedin"
@@ -353,7 +351,6 @@ const ApplicationForm: React.FC = () => {
                                         onChange={handleInputChange}
                                         placeholder="https://linkedin.com/in/yourprofile"
                                         className={`w-full bg-zinc-900 border ${errors.linkedin ? 'border-red-500 bg-red-500/5 ring-1 ring-red-500/50' : 'border-zinc-800'} rounded-xl px-5 py-4 text-white focus:outline-none focus:ring-2 focus:ring-white/10 transition-all font-medium`}
-                                        required
                                     />
                                     {errors.linkedin && (
                                         <div className="flex items-center gap-1.5 mt-2">
