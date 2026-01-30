@@ -28,7 +28,7 @@ const FAQ: React.FC = () => {
     const faqs = [
         {
             question: "What is the AI Leader Program and what do I get?",
-            answer: "A remote workforce program starting March 2026 that helps you earn a WordPress micro-credential and compete for living-wage WordPress job placement. Participants are paid $20/hr for completing the course (about 40 hours, ~$800 total before withholdings)."
+            answer: "A remote workforce program starting March 2026 that helps you earn a WordPress micro-credential and compete for living-wage WordPress job placement."
         },
         {
             question: "Who can apply?",
