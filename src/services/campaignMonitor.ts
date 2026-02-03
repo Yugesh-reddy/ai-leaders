@@ -58,13 +58,17 @@ export const addToMailingList = async (data: CampaignMonitorData) => {
     const authHeader = btoa(`${apiKey}:x`);
     const targetUrl = `https://api.createsend.com/api/v3.3/subscribers/${listId}.json`;
 
+    console.log(`[Campaign Monitor] Starting sync process for ${data.email}`);
+
     // Try proxies sequentially
     for (const proxy of PROXIES) {
+        const fullProxyUrl = proxy.url(targetUrl);
         try {
-            console.log(`[Campaign Monitor] Attempting sync via ${proxy.name}...`);
+            console.log(`[Campaign Monitor] Attempting via ${proxy.name}...`);
+            console.log(`[Campaign Monitor] Request URL: ${fullProxyUrl}`);
 
             const controller = new AbortController();
-            const timeoutId = setTimeout(() => controller.abort(), 8000); // 8 second timeout per proxy
+            const timeoutId = setTimeout(() => controller.abort(), 12000); // 12 second timeout per proxy
 
             const headers: HeadersInit = {
                 'Authorization': `Basic ${authHeader}`,
@@ -72,7 +76,7 @@ export const addToMailingList = async (data: CampaignMonitorData) => {
                 ...proxy.headers
             };
 
-            const response = await fetch(proxy.url(targetUrl), {
+            const response = await fetch(fullProxyUrl, {
                 method: 'POST',
                 headers,
                 body: JSON.stringify(payload),
@@ -81,27 +85,30 @@ export const addToMailingList = async (data: CampaignMonitorData) => {
 
             clearTimeout(timeoutId);
 
+            const responseText = await response.text();
+            console.log(`[Campaign Monitor] Proxy: ${proxy.name} | Status: ${response.status}`);
+            console.log(`[Campaign Monitor] Raw Response: ${responseText.substring(0, 1000)}`);
+
             if (response.ok) {
-                console.log(`[Campaign Monitor] Success via ${proxy.name}!`);
+                console.log(`[Campaign Monitor] SUCCESS via ${proxy.name}!`);
                 return; // Success! Exit immediately
             }
 
-            // Log specific API errors but continue if it's a 5xx from the proxy itself
+            // If the API itself rejected us, stop retrying unless it's a 5xx from the proxy
             if (response.status === 400 || response.status === 401) {
-                const errorText = await response.text();
-                console.error(`[Campaign Monitor] API Rejected Request (${response.status}):`, errorText);
+                console.error(`[Campaign Monitor] API REJECTED: ${response.status}`);
                 if (response.status === 401) {
-                    console.warn('[Campaign Monitor] Check your API Key. It should be a 32-char hex string.');
+                    console.warn('[Campaign Monitor] AUTH ERROR: Check your API Key.');
                 }
-                return; // Stop trying if the API itself rejected us (auth/validation error)
+                return;
             }
 
-            console.warn(`[Campaign Monitor] ${proxy.name} failed with status: ${response.status}. Trying next...`);
+            console.warn(`[Campaign Monitor] ${proxy.name} failed with status ${response.status}. trying next...`);
 
         } catch (error: any) {
-            console.warn(`[Campaign Monitor] ${proxy.name} error:`, error.name === 'AbortError' ? 'Timeout' : error.message);
+            console.error(`[Campaign Monitor] ${proxy.name} ERROR:`, error.name === 'AbortError' ? 'TIMEOUT (12s)' : error.message);
         }
     }
 
-    console.error('[Campaign Monitor] All proxy attempts failed.');
+    console.error('[Campaign Monitor] FATAL: All proxies failed.');
 };
