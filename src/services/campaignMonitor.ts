@@ -9,8 +9,26 @@ export interface CampaignMonitorData {
     orientation?: string;
 }
 
+const PROXIES: { name: string; url: (t: string) => string; headers: Record<string, string> }[] = [
+    {
+        name: 'CorsProxy.io',
+        url: (target: string) => `https://corsproxy.io/?${encodeURIComponent(target)}`,
+        headers: {}
+    },
+    {
+        name: 'AllOrigins',
+        url: (target: string) => `https://api.allorigins.win/raw?url=${encodeURIComponent(target)}`,
+        headers: {}
+    },
+    {
+        name: 'ThingProxy',
+        url: (target: string) => `https://thingproxy.freeboard.io/fetch/${target}`,
+        headers: { 'Accept': 'application/json' }
+    }
+];
+
 export const addToMailingList = async (data: CampaignMonitorData) => {
-    // Trim credentials just in case there's accidental whitespace from GitHub Secrets
+    // Trim credentials to avoid common whitespace issues
     const apiKey = import.meta.env.VITE_CAMPAIGN_MONITOR_API_KEY?.trim();
     const listId = import.meta.env.VITE_CAMPAIGN_MONITOR_LIST_ID?.trim();
 
@@ -23,66 +41,67 @@ export const addToMailingList = async (data: CampaignMonitorData) => {
         return;
     }
 
-    try {
-        console.log(`[Campaign Monitor] Syncing ${data.email}...`);
+    const payload = {
+        "EmailAddress": data.email,
+        "Name": `${data.firstName} ${data.lastName}`,
+        "CustomFields": [
+            { "Key": "linkedIn", "Value": data.linkedin || "" },
+            { "Key": "affiliation", "Value": data.affiliation || "" },
+            { "Key": "task", "Value": data.response || "" },
+            { "Key": "orientation", "Value": data.orientation || "" }
+        ],
+        "Resubscribe": true,
+        "RestartSubscriptionBasedAutoresponders": true,
+        "ConsentToTrack": "Yes"
+    };
 
-        const authHeader = btoa(`${apiKey}:x`);
+    const authHeader = btoa(`${apiKey}:x`);
+    const targetUrl = `https://api.createsend.com/api/v3.3/subscribers/${listId}.json`;
 
-        const payload = {
-            "EmailAddress": data.email,
-            "Name": `${data.firstName} ${data.lastName}`,
-            "CustomFields": [
-                { "Key": "linkedIn", "Value": data.linkedin || "" },
-                { "Key": "affiliation", "Value": data.affiliation || "" },
-                { "Key": "task", "Value": data.response || "" },
-                { "Key": "orientation", "Value": data.orientation || "" }
-            ],
-            "Resubscribe": true,
-            "RestartSubscriptionBasedAutoresponders": true,
-            "ConsentToTrack": "Yes"
-        };
-
-        const apiUrl = `https://api.createsend.com/api/v3.3/subscribers/${listId}.json`;
-
-        // Trying a different proxy that is often more reliable for POST requests with custom headers
-        const proxyUrl = `https://thingproxy.freeboard.io/fetch/${apiUrl}`;
-
-        console.log(`[Campaign Monitor] Requesting via ThingProxy...`);
-
-        // We use a shorter timeout for this attempt
-        const controller = new AbortController();
-        const timeoutId = setTimeout(() => controller.abort(), 10000);
-
+    // Try proxies sequentially
+    for (const proxy of PROXIES) {
         try {
-            const response = await fetch(proxyUrl, {
+            console.log(`[Campaign Monitor] Attempting sync via ${proxy.name}...`);
+
+            const controller = new AbortController();
+            const timeoutId = setTimeout(() => controller.abort(), 8000); // 8 second timeout per proxy
+
+            const headers: HeadersInit = {
+                'Authorization': `Basic ${authHeader}`,
+                'Content-Type': 'application/json',
+                ...proxy.headers
+            };
+
+            const response = await fetch(proxy.url(targetUrl), {
                 method: 'POST',
-                headers: {
-                    'Authorization': `Basic ${authHeader}`,
-                    'Content-Type': 'application/json',
-                    'Accept': 'application/json'
-                },
+                headers,
                 body: JSON.stringify(payload),
                 signal: controller.signal
             });
 
             clearTimeout(timeoutId);
-            console.log(`[Campaign Monitor] Received status: ${response.status}`);
 
-            if (!response.ok) {
-                const errorBody = await response.text();
-                console.error(`[Campaign Monitor] Error (${response.status}):`, errorBody);
-            } else {
-                console.log('[Campaign Monitor] Sync complete!');
+            if (response.ok) {
+                console.log(`[Campaign Monitor] Success via ${proxy.name}!`);
+                return; // Success! Exit immediately
             }
-        } catch (fetchError: any) {
-            if (fetchError.name === 'AbortError') {
-                console.error('[Campaign Monitor] Timeout reached. The proxy might be down or blocked.');
-            } else {
-                throw fetchError;
+
+            // Log specific API errors but continue if it's a 5xx from the proxy itself
+            if (response.status === 400 || response.status === 401) {
+                const errorText = await response.text();
+                console.error(`[Campaign Monitor] API Rejected Request (${response.status}):`, errorText);
+                if (response.status === 401) {
+                    console.warn('[Campaign Monitor] Check your API Key. It should be a 32-char hex string.');
+                }
+                return; // Stop trying if the API itself rejected us (auth/validation error)
             }
+
+            console.warn(`[Campaign Monitor] ${proxy.name} failed with status: ${response.status}. Trying next...`);
+
+        } catch (error: any) {
+            console.warn(`[Campaign Monitor] ${proxy.name} error:`, error.name === 'AbortError' ? 'Timeout' : error.message);
         }
-
-    } catch (error: any) {
-        console.error('[Campaign Monitor] Critical Failure:', error.message || error);
     }
+
+    console.error('[Campaign Monitor] All proxy attempts failed.');
 };
