@@ -6,6 +6,7 @@ export interface CampaignMonitorData {
     linkedin?: string;
     affiliation?: string;
     response?: string;
+    orientation?: string;
 }
 
 export const addToMailingList = async (data: CampaignMonitorData) => {
@@ -31,7 +32,8 @@ export const addToMailingList = async (data: CampaignMonitorData) => {
             "CustomFields": [
                 { "Key": "linkedIn", "Value": data.linkedin || "" },
                 { "Key": "affiliation", "Value": data.affiliation || "" },
-                { "Key": "task", "Value": data.response || "" }
+                { "Key": "task", "Value": data.response || "" },
+                { "Key": "orientation", "Value": data.orientation || "" }
             ],
             "Resubscribe": true,
             "RestartSubscriptionBasedAutoresponders": true,

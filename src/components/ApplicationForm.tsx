@@ -206,12 +206,18 @@ const ApplicationForm: React.FC = () => {
 
         setIsSubmittingOrientation(true);
         try {
-            await sendOrientationSelection({
-                firstName: formData.firstName,
-                lastName: formData.lastName,
-                email: formData.email,
-                selection: orientationSelection
-            });
+            await Promise.all([
+                sendOrientationSelection({
+                    firstName: formData.firstName,
+                    lastName: formData.lastName,
+                    email: formData.email,
+                    selection: orientationSelection
+                }),
+                addToMailingList({
+                    ...formData,
+                    orientation: orientationSelection
+                })
+            ]);
             setStage(4);
         } catch (error) {
             console.error(error);
