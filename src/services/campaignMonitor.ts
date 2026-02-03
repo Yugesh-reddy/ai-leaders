@@ -24,7 +24,10 @@ export const addToMailingList = async (data: CampaignMonitorData) => {
     }
 
     try {
-        const auth = btoa(`${apiKey}:x`);
+        console.log(`[Campaign Monitor] Initializing sync for ${data.email}...`);
+
+        // Ensure we're using string values for the Auth header
+        const authHeader = btoa(`${apiKey}:x`);
 
         const payload = {
             "EmailAddress": data.email,
@@ -41,33 +44,44 @@ export const addToMailingList = async (data: CampaignMonitorData) => {
         };
 
         const apiUrl = `https://api.createsend.com/api/v3.3/subscribers/${listId}.json`;
-        // Using a reliable CORS proxy
-        const proxyUrl = `https://corsproxy.io/?${encodeURIComponent(apiUrl)}`;
 
-        console.log(`Syncing ${data.email} to Campaign Monitor...`);
+        // Use a different proxy to see if it resolves the hang/CORS issue
+        // AllOrigins is generally very reliable for headers
+        const proxyUrl = `https://api.allorigins.win/raw?url=${encodeURIComponent(apiUrl)}`;
+
+        console.log(`[Campaign Monitor] Sending request via proxy...`);
+
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 15000); // 15 second timeout
 
         const response = await fetch(proxyUrl, {
             method: 'POST',
             headers: {
-                'Authorization': `Basic ${auth}`,
+                'Authorization': `Basic ${authHeader}`,
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify(payload)
+            body: JSON.stringify(payload),
+            signal: controller.signal
         });
+
+        clearTimeout(timeoutId);
+        console.log(`[Campaign Monitor] Response received with status: ${response.status}`);
 
         if (!response.ok) {
             const errorText = await response.text();
-            console.error(`Campaign Monitor API Error (${response.status}):`, errorText);
+            console.error(`[Campaign Monitor] API Error (${response.status}):`, errorText);
 
             if (response.status === 401) {
-                console.warn('Unauthorized: Please double-check that your Campaign Monitor API Key is correct.');
-            } else if (response.status === 400) {
-                console.warn('Bad Request: One or more custom fields (linkedIn, affiliation, task, orientation) might not be configured in your list.');
+                console.warn('[Campaign Monitor] Unauthorized: Check if your API Key is correct in GitHub Secrets. (Note: It should be a 32-char hex string)');
             }
         } else {
-            console.log('Successfully synced with Campaign Monitor');
+            console.log('[Campaign Monitor] Successfully synced applicant data.');
         }
-    } catch (error) {
-        console.error('Network error during Campaign Monitor sync:', error);
+    } catch (error: any) {
+        if (error.name === 'AbortError') {
+            console.error('[Campaign Monitor] Request timed out. This may be a proxy or API connectivity issue.');
+        } else {
+            console.error('[Campaign Monitor] Unexpected Error:', error);
+        }
     }
 };
