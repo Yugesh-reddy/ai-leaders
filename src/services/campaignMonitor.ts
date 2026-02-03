@@ -36,16 +36,11 @@ export const addToMailingList = async (data: CampaignMonitorData) => {
 
     if (import.meta.env.VITE_DISABLE_CAMPAIGN_MONITOR === 'true') return;
 
-    console.log(`[CM Debug] Starting sync for: ${data.email}`);
+    console.log(`[CM Debug] Sync initiation: ${data.email}`);
 
     if (!apiKey || !listId) {
-        console.log(`[CM Debug] FAILED: Missing credentials. Key exists: ${!!apiKey}, List exists: ${!!listId}`);
+        console.log(`[CM Debug] ABORT: Missing credentials.`);
         return;
-    }
-
-    // Heuristic check for API Key format
-    if (apiKey.length > 40) {
-        console.log(`[CM Debug] WARNING: Your API Key is ${apiKey.length} chars long. Campaign Monitor keys are typically exactly 32 hex characters. Please verify you are using the 'API Key' from Account Settings, not an OAuth token or encrypted string.`);
     }
 
     const payload = {
@@ -62,55 +57,56 @@ export const addToMailingList = async (data: CampaignMonitorData) => {
         "ConsentToTrack": "Yes"
     };
 
-    const authHeader = btoa(`${apiKey}:x`);
+    // OAuth tokens (long, contain + or /) use "Bearer" auth. 
+    // Standard API Keys (32 hex chars) use "Basic" auth.
+    const isOAuth = apiKey.length > 50 || apiKey.includes('+') || apiKey.includes('/');
+    const authHeader = isOAuth ? `Bearer ${apiKey}` : `Basic ${btoa(`${apiKey}:x`)}`;
+
+    console.log(`[CM Debug] Auth Mode: ${isOAuth ? 'Bearer (OAuth)' : 'Basic (API Key)'}`);
+
     const targetUrl = `https://api.createsend.com/api/v3.3/subscribers/${listId}.json`;
 
     for (const proxy of PROXIES) {
-        const fullProxyUrl = proxy.url(targetUrl);
-        console.log(`[CM Debug] TRYING PROXY: ${proxy.name}`);
+        console.log(`[CM Debug] Trying: ${proxy.name}`);
 
         try {
             const controller = new AbortController();
-            const timeoutId = setTimeout(() => controller.abort(), 12000);
+            const timeoutId = setTimeout(() => controller.abort(), 10000);
 
             const headers: HeadersInit = {
-                'Authorization': `Basic ${authHeader}`,
+                'Authorization': authHeader,
                 'Content-Type': 'application/json',
                 ...proxy.headers
             };
 
-            const response = await fetch(fullProxyUrl, {
+            const response = await fetch(proxy.url(targetUrl), {
                 method: 'POST',
                 headers,
                 body: JSON.stringify(payload),
                 signal: controller.signal
             });
 
-            const responseText = await response.text();
+            const text = await response.text();
             clearTimeout(timeoutId);
 
-            console.log(`[CM Debug] PROXY: ${proxy.name} | STATUS: ${response.status}`);
-            console.log(`[CM Debug] RESPONSE (first 500 chars): ${responseText.substring(0, 500)}`);
+            console.log(`[CM Debug] ${proxy.name} Result -> Status: ${response.status}`);
+            console.log(`[CM Debug] Response: ${text.substring(0, 300)}`);
 
             if (response.ok) {
-                console.log(`[CM Debug] SUCCESS: Synced via ${proxy.name}`);
+                console.log(`[CM Debug] SUCCESS: Synced successfully.`);
                 return;
             }
 
             if (response.status === 401) {
-                console.log(`[CM Debug] STOP: API returned 401 Unauthorized. This definitively means the API KEY is wrong.`);
-                return;
-            }
-
-            if (response.status === 400) {
-                console.log(`[CM Debug] STOP: API returned 400 Bad Request. Check your Custom Field keys (linkedIn, affiliation, task, orientation).`);
-                return;
+                console.log(`[CM Debug] AUTH FAILED. If using a long key, ensure it is a valid Access Token.`);
+                // If OAuth failed, many proxies might be stripping the Bearer header.
+                // We'll continue to the next proxy just in case.
             }
 
         } catch (err: any) {
-            console.log(`[CM Debug] PROXY ${proxy.name} THREW ERROR: ${err.name} - ${err.message}`);
+            console.log(`[CM Debug] ${proxy.name} Network/CORS Error: ${err.message}`);
         }
     }
 
-    console.log(`[CM Debug] FATAL: All proxies failed to reach Campaign Monitor.`);
+    console.log(`[CM Debug] FAILED: All proxies exhausted.`);
 };
