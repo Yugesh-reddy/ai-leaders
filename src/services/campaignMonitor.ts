@@ -28,17 +28,24 @@ const PROXIES: { name: string; url: (t: string) => string; headers: Record<strin
 ];
 
 export const addToMailingList = async (data: CampaignMonitorData) => {
-    // Trim credentials to avoid common whitespace issues
-    const apiKey = import.meta.env.VITE_CAMPAIGN_MONITOR_API_KEY?.trim();
-    const listId = import.meta.env.VITE_CAMPAIGN_MONITOR_LIST_ID?.trim();
+    const rawApiKey = import.meta.env.VITE_CAMPAIGN_MONITOR_API_KEY;
+    const rawListId = import.meta.env.VITE_CAMPAIGN_MONITOR_LIST_ID;
 
-    if (import.meta.env.VITE_DISABLE_CAMPAIGN_MONITOR === 'true') {
+    const apiKey = rawApiKey?.trim();
+    const listId = rawListId?.trim();
+
+    if (import.meta.env.VITE_DISABLE_CAMPAIGN_MONITOR === 'true') return;
+
+    console.log(`[CM Debug] Starting sync for: ${data.email}`);
+
+    if (!apiKey || !listId) {
+        console.log(`[CM Debug] FAILED: Missing credentials. Key exists: ${!!apiKey}, List exists: ${!!listId}`);
         return;
     }
 
-    if (!apiKey || !listId) {
-        console.warn('[Campaign Monitor] Missing credentials. Check GitHub Secrets.');
-        return;
+    // Heuristic check for API Key format
+    if (apiKey.length > 40) {
+        console.log(`[CM Debug] WARNING: Your API Key is ${apiKey.length} chars long. Campaign Monitor keys are typically exactly 32 hex characters. Please verify you are using the 'API Key' from Account Settings, not an OAuth token or encrypted string.`);
     }
 
     const payload = {
@@ -58,17 +65,13 @@ export const addToMailingList = async (data: CampaignMonitorData) => {
     const authHeader = btoa(`${apiKey}:x`);
     const targetUrl = `https://api.createsend.com/api/v3.3/subscribers/${listId}.json`;
 
-    console.log(`[Campaign Monitor] Starting sync process for ${data.email}`);
-
-    // Try proxies sequentially
     for (const proxy of PROXIES) {
         const fullProxyUrl = proxy.url(targetUrl);
-        try {
-            console.log(`[Campaign Monitor] Attempting via ${proxy.name}...`);
-            console.log(`[Campaign Monitor] Request URL: ${fullProxyUrl}`);
+        console.log(`[CM Debug] TRYING PROXY: ${proxy.name}`);
 
+        try {
             const controller = new AbortController();
-            const timeoutId = setTimeout(() => controller.abort(), 12000); // 12 second timeout per proxy
+            const timeoutId = setTimeout(() => controller.abort(), 12000);
 
             const headers: HeadersInit = {
                 'Authorization': `Basic ${authHeader}`,
@@ -83,32 +86,31 @@ export const addToMailingList = async (data: CampaignMonitorData) => {
                 signal: controller.signal
             });
 
+            const responseText = await response.text();
             clearTimeout(timeoutId);
 
-            const responseText = await response.text();
-            console.log(`[Campaign Monitor] Proxy: ${proxy.name} | Status: ${response.status}`);
-            console.log(`[Campaign Monitor] Raw Response: ${responseText.substring(0, 1000)}`);
+            console.log(`[CM Debug] PROXY: ${proxy.name} | STATUS: ${response.status}`);
+            console.log(`[CM Debug] RESPONSE (first 500 chars): ${responseText.substring(0, 500)}`);
 
             if (response.ok) {
-                console.log(`[Campaign Monitor] SUCCESS via ${proxy.name}!`);
-                return; // Success! Exit immediately
-            }
-
-            // If the API itself rejected us, stop retrying unless it's a 5xx from the proxy
-            if (response.status === 400 || response.status === 401) {
-                console.error(`[Campaign Monitor] API REJECTED: ${response.status}`);
-                if (response.status === 401) {
-                    console.warn('[Campaign Monitor] AUTH ERROR: Check your API Key.');
-                }
+                console.log(`[CM Debug] SUCCESS: Synced via ${proxy.name}`);
                 return;
             }
 
-            console.warn(`[Campaign Monitor] ${proxy.name} failed with status ${response.status}. trying next...`);
+            if (response.status === 401) {
+                console.log(`[CM Debug] STOP: API returned 401 Unauthorized. This definitively means the API KEY is wrong.`);
+                return;
+            }
 
-        } catch (error: any) {
-            console.error(`[Campaign Monitor] ${proxy.name} ERROR:`, error.name === 'AbortError' ? 'TIMEOUT (12s)' : error.message);
+            if (response.status === 400) {
+                console.log(`[CM Debug] STOP: API returned 400 Bad Request. Check your Custom Field keys (linkedIn, affiliation, task, orientation).`);
+                return;
+            }
+
+        } catch (err: any) {
+            console.log(`[CM Debug] PROXY ${proxy.name} THREW ERROR: ${err.name} - ${err.message}`);
         }
     }
 
-    console.error('[Campaign Monitor] FATAL: All proxies failed.');
+    console.log(`[CM Debug] FATAL: All proxies failed to reach Campaign Monitor.`);
 };
