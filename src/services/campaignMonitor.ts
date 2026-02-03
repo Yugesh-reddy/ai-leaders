@@ -10,47 +10,68 @@ export interface CampaignMonitorData {
 }
 
 /**
- * Direct Campaign Monitor Form Submission
- * Uses the AJAX/Form endpoint to bypass CORS and API Key requirements.
- * This is the most reliable method for static sites (GitHub Pages).
+ * Native Form Submission Fallback
+ * This method is the most reliable for GitHub Pages as it uses the browser's 
+ * native form submisson engine, which is not restricted by CORS or Fetch policies.
  */
 export const addToMailingList = async (data: CampaignMonitorData) => {
     if (import.meta.env.VITE_DISABLE_CAMPAIGN_MONITOR === 'true') return;
 
-    console.log(`[CM Sync] Direct sync initiation for ${data.email}`);
+    console.log(`[CM Sync] Triggering native form sync for ${data.email}`);
 
     try {
-        const formUrl = 'https://www.createsend.com/t/subscribe';
+        // 1. Create a hidden iframe to catch the response (preventing page refresh)
+        const iframeName = 'cm_sync_iframe_' + Date.now();
+        const iframe = document.createElement('iframe');
+        iframe.name = iframeName;
+        iframe.style.display = 'none';
+        document.body.appendChild(iframe);
 
-        // These IDs are taken directly from your provided HTML snippet
-        const formData = new URLSearchParams();
+        // 2. Create the hidden form
+        const form = document.createElement('form');
+        form.method = 'POST';
+        form.action = 'https://www.createsend.com/t/subscribe';
+        form.target = iframeName; // Send result to the hidden iframe
+        form.style.display = 'none';
 
-        // This is the specific List/Form ID from your data-id attribute
+        // 3. Add the List/Form ID (data-id from your snippet)
         const formId = '5B5E7037DA78A748374AD499497E309EF16C08CED7112A9822BA32FB0DED7970821237BD9AB7F9092FDE575C05B4E60A72A9149DCB6ECA1715D0229BDF2A67E3';
+        const idInput = document.createElement('input');
+        idInput.type = 'hidden';
+        idInput.name = 'id';
+        idInput.value = formId;
+        form.appendChild(idInput);
 
-        // Standard CM field names from your snippet
-        formData.append('cm-name', `${data.firstName} ${data.lastName}`);
-        formData.append('cm-nttliki-nttliki', data.email); // The obfuscated email field name
+        // 4. Map the fields exactly as they appear in your HTML snippet
+        const fields: Record<string, string> = {
+            'cm-name': `${data.firstName} ${data.lastName}`,
+            'cm-nttliki-nttliki': data.email,
+            'cm-f-dkskhtu': data.linkedin || '',
+            'cm-f-dkskhil': data.affiliation || '',
+            'cm-f-dkskhir': data.response || '',
+            'cm-f-dksurlt': data.orientation || ''
+        };
 
-        // Custom Fields using the specific IDs you provided
-        formData.append('cm-f-dkskhtu', data.linkedin || '');
-        formData.append('cm-f-dkskhil', data.affiliation || '');
-        formData.append('cm-f-dkskhir', data.response || '');
-        formData.append('cm-f-dksurlt', data.orientation || '');
-
-        // Use no-cors mode to ensure the request is sent without a pre-flight check.
-        // This is a "fire and forget" request that will definitely reach Campaign Monitor.
-        await fetch(formUrl + `?id=${formId}`, {
-            method: 'POST',
-            mode: 'no-cors',
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded'
-            },
-            body: formData.toString()
+        Object.entries(fields).forEach(([name, value]) => {
+            const input = document.createElement('input');
+            input.type = 'hidden';
+            input.name = name;
+            input.value = value;
+            form.appendChild(input);
         });
 
-        console.log(`[CM Sync] Success: Data pushed directly to Campaign Monitor.`);
+        // 5. Execute the submission
+        document.body.appendChild(form);
+        form.submit();
+
+        // 6. Cleanup after a short delay
+        setTimeout(() => {
+            document.body.removeChild(form);
+            document.body.removeChild(iframe);
+            console.log(`[CM Sync] Native submission sent.`);
+        }, 2000);
+
     } catch (err: any) {
-        console.error(`[CM Sync] Failed during direct submission:`, err.message);
+        console.error(`[CM Sync] Error in native submission:`, err.message);
     }
 };
