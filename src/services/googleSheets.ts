@@ -35,14 +35,13 @@ export const syncToGoogleSheet = async (data: GoogleSheetData) => {
     console.log(`[Google Sheets] Syncing ${data.email}...`);
 
     try {
-        // We use no-cors mode because Google Apps Script redirects to a different domain,
-        // which causes CORS issues in 'cors' mode. 'no-cors' allows the request to succeed
-        // silently (response type is 'opaque').
+        // Using text/plain is more reliable for 'no-cors' requests to Google Apps Script.
+        // It avoids pre-flight checks while still allowing us to send the JSON string.
         await fetch(scriptUrl, {
             method: 'POST',
             mode: 'no-cors',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'text/plain'
             },
             body: JSON.stringify(data)
         });
