@@ -41,6 +41,7 @@ const Partners: React.FC = () => {
                             href={partner.url}
                             target="_blank"
                             rel="noopener noreferrer"
+                            aria-label={`Visit ${partner.name} website`}
                             className="h-32 bg-white/[0.02] border border-white/5 rounded-xl flex items-center justify-center hover:bg-white/5 hover:border-white/20 transition-all duration-300 group p-8"
                         >
                             <img

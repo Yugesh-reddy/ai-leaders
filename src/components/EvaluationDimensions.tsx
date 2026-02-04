@@ -110,7 +110,7 @@ const EvaluationDimensions: React.FC<EvaluationDimensionsProps> = ({ stage, scor
                                         transition={{ duration: 0.4 }}
                                     >
                                         <div className="mt-4 pt-4 border-t border-white/10">
-                                            <p className="text-[10px] text-gray-500 uppercase font-black tracking-widest mb-1.5 opacity-60">Scoring Rubric</p>
+                                            <p className="text-[10px] text-gray-400 uppercase font-black tracking-widest mb-1.5 opacity-60">Scoring Rubric</p>
                                             <p className="text-sm text-gray-400 italic leading-relaxed">
                                                 {dim.rubric}
                                             </p>

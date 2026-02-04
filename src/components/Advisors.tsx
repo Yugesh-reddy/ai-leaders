@@ -68,7 +68,7 @@ const Advisors: React.FC = () => {
                                         href={advisor.linkedin}
                                         target="_blank"
                                         rel="noopener noreferrer"
-                                        className="text-gray-500 hover:text-[#0077b5] transition-colors p-1"
+                                        className="text-zinc-400 hover:text-[#0077b5] transition-colors p-1"
                                         aria-label={`${advisor.name}'s LinkedIn`}
                                     >
                                         <LinkedinIcon className="w-5 h-5" />

@@ -61,7 +61,7 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
                             <a
                                 key={link.id}
                                 href={link.href}
-                                className={`transition-all duration-300 ${activeSection === link.id ? 'text-white border-b border-white' : 'text-zinc-500 hover:text-white'}`}
+                                className={`transition-all duration-300 ${activeSection === link.id ? 'text-white border-b border-white' : 'text-zinc-400 hover:text-white'}`}
                             >
                                 {link.name}
                             </a>
@@ -72,7 +72,7 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
                             href="https://join.slack.com/t/1111philo/shared_invite/zt-2gmnevnx3-qR6119iBjUFxS4BgP8wXzA"
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="text-zinc-500 hover:text-[#4A154B] transition-colors"
+                            className="text-zinc-400 hover:text-[#4A154B] transition-colors"
                             aria-label="Slack Channel"
                         >
                             <SlackIcon className="w-5 h-5" />
@@ -81,7 +81,7 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
                             href="http://github.com/1111philo/ai-leaders/"
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="text-zinc-500 hover:text-white transition-colors"
+                            className="text-zinc-400 hover:text-white transition-colors"
                             aria-label="GitHub Repository"
                         >
                             <svg viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5" aria-hidden="true">
@@ -106,8 +106,8 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
                 <div className="container mx-auto px-6">
                     <div className="flex flex-col md:flex-row justify-between items-center">
                         <div className="mb-6 md:mb-0">
-                            <h3 className="text-xl font-bold tracking-tight mb-2">AI LEADERS</h3>
-                            <p className="text-gray-500 text-sm">Empowering the next generation of tech leaders.</p>
+                            <div className="text-xl font-bold tracking-tight mb-2 uppercase">AI LEADERS</div>
+                            <p className="text-zinc-400 text-sm">Empowering the next generation of tech leaders.</p>
                         </div>
                         <div className="text-gray-400 text-sm">
                             Questions? Email <a href="mailto:help@ai-leaders.org" className="text-white hover:underline transition-all">help@ai-leaders.org</a>

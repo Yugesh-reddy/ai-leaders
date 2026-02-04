@@ -11,7 +11,7 @@ const FaqItem: React.FC<{ question: string; answer: React.ReactNode }> = ({ ques
                 onClick={() => setIsOpen(!isOpen)}
             >
                 <span className="text-lg font-medium text-gray-200 group-hover:text-white transition-colors">{question}</span>
-                <span className={`transform transition-transform duration-300 ${isOpen ? 'rotate-180' : ''} text-gray-500`}>
+                <span className={`transform transition-transform duration-300 ${isOpen ? 'rotate-180' : ''} text-zinc-400`}>
                     <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                     </svg>

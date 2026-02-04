@@ -402,7 +402,7 @@ const ApplicationForm: React.FC = () => {
                             {/* Identity Fields */}
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
                                 <div className="space-y-3">
-                                    <label htmlFor="firstName" className="text-xs font-black uppercase tracking-widest text-gray-500">First Name</label>
+                                    <label htmlFor="firstName" className="text-xs font-black uppercase tracking-widest text-zinc-400">First Name</label>
                                     <input
                                         type="text"
                                         id="firstName"
@@ -421,7 +421,7 @@ const ApplicationForm: React.FC = () => {
                                     )}
                                 </div>
                                 <div className="space-y-3">
-                                    <label htmlFor="lastName" className="text-xs font-black uppercase tracking-widest text-gray-500">Last Name</label>
+                                    <label htmlFor="lastName" className="text-xs font-black uppercase tracking-widest text-zinc-400">Last Name</label>
                                     <input
                                         type="text"
                                         id="lastName"
@@ -443,7 +443,7 @@ const ApplicationForm: React.FC = () => {
 
                             <div className="space-y-8 mb-10">
                                 <div className="space-y-3">
-                                    <label htmlFor="email" className="text-xs font-black uppercase tracking-widest text-gray-500">Email Address</label>
+                                    <label htmlFor="email" className="text-xs font-black uppercase tracking-widest text-zinc-400">Email Address</label>
                                     <input
                                         type="email"
                                         id="email"
@@ -463,7 +463,7 @@ const ApplicationForm: React.FC = () => {
                                 </div>
 
                                 <div className="space-y-3">
-                                    <label htmlFor="linkedin" className="text-xs font-black uppercase tracking-widest text-gray-500">LinkedIn Profile URL (Optional)</label>
+                                    <label htmlFor="linkedin" className="text-xs font-black uppercase tracking-widest text-zinc-400">LinkedIn Profile URL (Optional)</label>
                                     <input
                                         type="url"
                                         id="linkedin"
@@ -483,7 +483,7 @@ const ApplicationForm: React.FC = () => {
                                 </div>
 
                                 <div className="space-y-3">
-                                    <label htmlFor="affiliation" className="text-xs font-black uppercase tracking-widest text-gray-500">Affiliation</label>
+                                    <label htmlFor="affiliation" className="text-xs font-black uppercase tracking-widest text-zinc-400">Affiliation</label>
                                     <div className="relative group">
                                         <select
                                             id="affiliation"
@@ -498,7 +498,7 @@ const ApplicationForm: React.FC = () => {
                                             <option value="Louisiana Tech University">Louisiana Tech University</option>
                                             <option value="None">None</option>
                                         </select>
-                                        <div className="absolute right-5 top-1/2 -translate-y-1/2 pointer-events-none text-zinc-500 group-hover:text-zinc-300 transition-colors">
+                                        <div className="absolute right-5 top-1/2 -translate-y-1/2 pointer-events-none text-zinc-400 group-hover:text-zinc-300 transition-colors">
                                             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                                             </svg>
@@ -537,6 +537,7 @@ const ApplicationForm: React.FC = () => {
                                     rows={12}
                                     className={`w-full bg-zinc-950 border ${errors.response ? 'border-red-500 bg-red-500/5 ring-1 ring-red-500/50' : 'border-zinc-800'} rounded-2xl px-6 py-6 text-white focus:outline-none focus:ring-2 focus:ring-white/10 transition-all font-mono text-sm leading-relaxed`}
                                     placeholder="Write your response here... feel free to use AI to help you draft and refine it."
+                                    aria-label="Technical project description and personal interest"
                                     required
                                 ></textarea>
                                 {errors.response && (
@@ -595,7 +596,7 @@ const ApplicationForm: React.FC = () => {
 
                                 <div className="space-y-4">
                                     <div className="flex justify-between items-center px-2">
-                                        <p className="text-xs text-zinc-600 font-mono">
+                                        <p className="text-xs text-zinc-400 font-mono">
                                             Protected by ReCAPTCHA v3
                                         </p>
                                     </div>
@@ -676,7 +677,7 @@ const ApplicationForm: React.FC = () => {
                     <div className="lg:col-span-2 space-y-10 order-1 lg:order-2">
                         <div className="border-l-2 border-white/10 pl-6 py-2">
                             <h3 className="text-2xl font-black text-white mb-3">Evaluation Criteria</h3>
-                            <p className="text-gray-500 leading-relaxed italic">
+                            <p className="text-zinc-400 leading-relaxed italic">
                                 We don't judge you on what you already know. We value how you think, learn, and iterate.
                             </p>
                         </div>
