@@ -60,33 +60,46 @@ For simple changes like documentation fixes, you can use GitHub's built-in edito
 
 ### Adding or Updating Lessons
 
-The curriculum is content-driven. Adding or updating a lesson is as simple as modifying or creating a Markdown file.
+This project is content-driven and designed to be maintained using AI. The "source of truth" for the curriculum is the `knowledge/course_map.csv` file.
+
+#### Recommended Workflow (AI-Assisted)
+
+We recommend using your AI agent (Antigravity/Claude Code) to perform the heavy lifting for lesson content:
+
+1. **Reference the Map**: Tell your AI to read `knowledge/course_map.csv`.
+2. **Identify the Task**: Point the AI to a specific lesson ID (e.g., "Review Lesson 1.2").
+3. **Generate Content**: Instruct the AI to generate or update the corresponding Markdown file in `src/content/lessons/` using the data from the CSV.
+   - *Example Prompt*: *"Read lesson 1.4 in course_map.csv and update src/content/lessons/1.4-creativity.md. Ensure it has the correct frontmatter and write comprehensive, high-quality content that achieves the learning objectives listed in the CSV."*
+4. **Verification**: The AI will ensure the formatting is correct, including the required frontmatter shown below.
+
+#### Technical Details
 
 1. **Location**: All lesson files live in `src/content/lessons/`.
 2. **File Naming**: Use the format `X.X-short-description.md` (e.g., `1.1-fundamentals-how-ai-works.md`).
-3. **Format**: Every lesson file must start with a YAML frontmatter block. The application uses these fields to build the curriculum index and the lesson pages.
+3. **Required Frontmatter**: The application uses these fields for routing, indexing, and the AI Tutor. The agent should always include these:
 
 ```markdown
 ---
 id: "1.1"                     # Unique ID for sorting
 title: "Lesson Title"         # Main headline
-domain: "1. AI Leadership"    # Category (e.g., Foundations, AI Leadership, WordPress)
-progression: "Micro-Credential" # Tier (Micro-Credential or Full Credential)
-learning_objective: "..."     # Clear objective for the learner
-enduring_understandings: "..." # Core concepts to remember
-essential_questions: "..."    # Questions to spark critical thinking
-assessment_project: "..."     # Description of the final task
-mastery_criteria: "..."       # Specific metrics the AI Tutor uses for grading
-activities: "..."             # Optional: list of learning activities
+domain: "1. AI Leadership"    # Category
+progression: "Micro-Credential" # Tier
+learning_objective: "..."     # From CSV
+enduring_understandings: "..." # From CSV
+essential_questions: "..."    # From CSV
+assessment_project: "..."     # From CSV
+mastery_criteria: "..."       # Specific metrics for AI Tutor grading
+activities: "..."             # Learning steps
 ---
 
-# Optional: Lesson Title Again (Will be stripped in UI to avoid duplication)
+# Optional: Lesson Title (Will be automatically stripped in the UI)
 
 ## Introduction
-... Lesson content goes here ...
+... Detailed content drafted by AI and refined by you ...
 ```
 
-4. **Dynamic Updates**: When you add or change a file in this directory, the site's curriculum index, progress bars, and detail pages will update automatically.
+4. **Dynamic Updates**: As soon as the Markdown file is saved in `src/content/lessons/`, the Curriculum page, Progress bars, and AI Tutor will update automatically.
+
 
 
 ### Submitting Your PR
