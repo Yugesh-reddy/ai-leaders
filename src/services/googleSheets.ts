@@ -1,11 +1,18 @@
 export interface GoogleSheetData {
     email: string;
-    firstName: string;
-    lastName: string;
+    firstName?: string;
+    lastName?: string;
     linkedin?: string;
     affiliation?: string;
     response?: string;
     orientation?: string;
+
+    // Lesson Submission Fields
+    lessonId?: string;
+    lessonTitle?: string;
+    submissionContent?: string;
+    aiScore?: string;
+    aiFeedback?: string;
 }
 
 /**

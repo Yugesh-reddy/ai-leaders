@@ -58,6 +58,37 @@ For simple changes like documentation fixes, you can use GitHub's built-in edito
 3. Make your changes in the editor.
 4. Scroll down to **Commit changes**, select "Create a new branch for this commit and start a pull request," and click **Propose changes**.
 
+### Adding or Updating Lessons
+
+The curriculum is content-driven. Adding or updating a lesson is as simple as modifying or creating a Markdown file.
+
+1. **Location**: All lesson files live in `src/content/lessons/`.
+2. **File Naming**: Use the format `X.X-short-description.md` (e.g., `1.1-fundamentals-how-ai-works.md`).
+3. **Format**: Every lesson file must start with a YAML frontmatter block. The application uses these fields to build the curriculum index and the lesson pages.
+
+```markdown
+---
+id: "1.1"                     # Unique ID for sorting
+title: "Lesson Title"         # Main headline
+domain: "1. AI Leadership"    # Category (e.g., Foundations, AI Leadership, WordPress)
+progression: "Micro-Credential" # Tier (Micro-Credential or Full Credential)
+learning_objective: "..."     # Clear objective for the learner
+enduring_understandings: "..." # Core concepts to remember
+essential_questions: "..."    # Questions to spark critical thinking
+assessment_project: "..."     # Description of the final task
+mastery_criteria: "..."       # Specific metrics the AI Tutor uses for grading
+activities: "..."             # Optional: list of learning activities
+---
+
+# Optional: Lesson Title Again (Will be stripped in UI to avoid duplication)
+
+## Introduction
+... Lesson content goes here ...
+```
+
+4. **Dynamic Updates**: When you add or change a file in this directory, the site's curriculum index, progress bars, and detail pages will update automatically.
+
+
 ### Submitting Your PR
 
 Regardless of the method used, once your changes are pushed to your fork:
