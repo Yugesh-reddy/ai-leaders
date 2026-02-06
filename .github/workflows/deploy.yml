@@ -49,6 +49,8 @@ jobs:
           VITE_DISABLE_SLACK: ${{ secrets.VITE_DISABLE_SLACK || 'false' }}
           VITE_DISABLE_GEMINI: ${{ secrets.VITE_DISABLE_GEMINI || 'false' }}
           VITE_DISABLE_GOOGLE_SHEETS: ${{ secrets.VITE_DISABLE_GOOGLE_SHEETS || 'false' }}
+      - name: Fix 404 for GitHub Pages
+        run: cp dist/index.html dist/404.html
       - name: Setup Pages
         uses: actions/configure-pages@v5
       - name: Upload artifact
