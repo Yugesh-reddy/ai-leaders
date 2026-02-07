@@ -1,86 +1,214 @@
 Domain,Course Progression,Competency,Learning Objective,Enduring Understandings,Essential Questions,"Assessment Project
 Check Bloom's & Webb's",Mastery Criteria / Success Metrics,UDL Accommodations,Activities
 0. Foundations,Micro-Credential,"0.1. Professional Communication
-Typing & Clarity","I can communicate in writing digitally quickly, clearly, and effectively.","1. Written communication is critical for career success.
-2. Touch typing enables effective written communication.
-3. I have to make sure my audience understands what I'm trying to say.","1. How will I need to communicate in writing to be successful in my career?
-2. How can I become efficient and effective at written communication?
-3. How can I make sure my audience understands what I'm saying?",Type a post for your workplace messaging network introducing yourself to your new team.,"1. 40+ WPM
-2. 90%+ accuracy
-3. Easily understandable by a 10 year old
-4. Effectively convey your meaning
-5. Effective for the context
-","Engagement:
-Representation: Interpretation
-Action: Voice-to-text",
+Typing & Clarity","I can communicate in writing digitally quickly, clearly, and effectively.","1. Written communication is critical for remote and hybrid career success.
+2. Touch typing enables thought-speed communication.
+3. Clarity and brevity respect the reader's time.","1. How does my writing style affect how I am perceived professionally?
+2. Why is speed important in digital communication?
+3. How can I ensure my message is understood exactly as intended?",Type a post for your workplace messaging network introducing yourself to your new team.,"1. Typing speed of 40+ WPM.
+2. 90%+ accuracy.
+3. Tone is professional yet approachable.
+4. Message is concise (under 150 words).
+5. Zero spelling or grammar errors.","Engagement: Choice of communication topic and format (Slack message, email, or forum post).
+Representation: Video demonstrations of touch typing, written guides, audio instructions.
+Action: Voice-to-text alternatives, keyboard overlays, adjustable typing test speeds.","1. Take a typing test at 10fastfingers.com.
+2. Rewrite a complex paragraph to be simple enough for a 5th grader (Hemingway App)."
 0. Foundations,Micro-Credential,"0.2. Tech Stack Fluency
-Hardware, OS, Software",I can use my tech stack fluently and effectively.,,,,,"Engagement:
-Representation:
-Action:",
+Hardware, OS, Software",I can use my tech stack fluently and effectively to maximize productivity.,"1. Your computer is a tool; knowing how it works makes you a master craftsman.
+2. Keyboard shortcuts are the fastest way to navigate digital space.
+3. Organizing your digital workspace reduces mental clutter.","1. Do I control my computer, or does it control me?
+2. How much time do I lose manually clicking through menus?
+3. Is my digital environment set up for deep work?",Submit a screenshot or description of your organized desktop and list 5 keyboard shortcuts you used today.,"1. Desktop is clean with grouped files.
+2. Correctly identifies specs (RAM, Storage, CPU) of current machine.
+3. Lists 5 valid keyboard shortcuts for their OS.
+4. Demonstrates browser tab management.","Engagement: Choose your own OS (Mac, Windows, Linux) and preferred browser.
+Representation: Visual shortcut cheat sheets, video tutorials, interactive keyboard trainers.
+Action: Customizable keyboard shortcuts, mouse alternatives, accessibility settings.","1. Clean your Desktop (0 files).
+2. Learn the shortcut for 'Screenshot', 'Find', 'New Tab', 'Close Tab', and 'Switch App'."
 0. Foundations,Micro-Credential,"0.3. Organization
-Analog, Local, & Cloud","I can organize my information, thinking, and documents in a way that I can find what I need quickly and consistently without losing or forgetting things.",,,,,"Engagement:
-Representation:
-Action:",
+Analog, Local, & Cloud","I can organize my information, thinking, and documents in a way that I can find what I need quickly and consistently without losing or forgetting things.","1. A clear organizational system frees up mental energy for creativity.
+2. Search is powerful, but structure is reliable.
+3. Backups are not optional; they are insurance.","1. If I needed a file from 3 years ago, could I find it in 5 minutes?
+2. What happens if I lose my laptop today?
+3. How do I capture ideas before I forget them?","Create a folder structure for a hypothetical project and describe how you would name the files using the YYYY-MM-DD convention.","1. Folder structure shows logical hierarchy (Project > Date/Category).
+2. File naming convention is consistent (YYYY-MM-DD_Name).
+3. Distinctions made between Local and Cloud storage use cases.","Engagement: Choice of organizational system (PARA, GTD, or custom method).
+Representation: Visual folder diagrams, video demos, written step-by-step guides.
+Action: Voice commands for file management, template starter folders provided.","1. Standardize file names using ISO 8601 dates (YYYY-MM-DD).
+2. Set up a cloud backup (Google Drive/iCloud).
+3. Clean your Downloads folder and organize documents."
 0. Foundations,Micro-Credential,"0.4. Prioritization & Time Management
-Motivation, Planning, & Focus",I can motivate myself and prioritize my time to get the most important things done effectively without getting overwhelmed or too distracted.,,,,,"Engagement:
-Representation:
-Action:",
+Motivation, Planning, & Focus",I can motivate myself and prioritize my time to get the most important things done effectively without getting overwhelmed or too distracted.,"1. Being busy is not the same as being productive.
+2. Willpower is a limited resource; rely on systems instead.
+3. The most important tasks are often the hardest to start.","1. Am I doing high-value work, or just urgent work?
+2. How do I handle procrastination?
+3. When is my peak productive energy?",Create a prioritized to-do list for tomorrow using the Eisenhower Matrix.,"1. Tasks clearly separated into Urgent/Important quadrants.
+2. Top priority (Start of day) is identified.
+3. Distractions/Time-wasters are identified to be ignored.","Engagement: Choice of productivity system (Pomodoro, time-blocking, or custom).
+Representation: Visual matrix templates, video explanations, audio-guided focus sessions.
+Action: Timer apps, calendar blocking tools, distraction-blocking extensions.","1. Try the Pomodoro Technique (25m work, 5m break).
+2. Block 'Deep Work' time on your calendar."
 0. Foundations,Micro-Credential,"0.5. Measuring Impact
-Analysis & Visualization
-",I can measure the impact of projects toward a goal and track that metric over time.,,,,,"Engagement:
-Representation:
-Action:",
+Analysis & Visualization",I can measure the impact of projects toward a goal and track that metric over time.,"1. 'If you can't measure it, you can't improve it.' (Drucker)
+2. Data tells a story; visualization makes it readable.
+3. Focus on outcomes (results), not just outputs (activity).","1. How do I know if I am succeeding?
+2. What metric actually matters for this goal?
+3. How can I present this data to persuade others?","Define a goal, a Key Performance Indicator (KPI) for it, and describe how you would visualize progress.","1. Goal is Specific and Measurable (SMART).
+2. KPI is relevant to the goal.
+3. Visualization method (Line chart, Bar graph) is appropriate for the data type.","Engagement: Choice of tracking tool (spreadsheet, app, or pen-and-paper).
+Representation: Sample dashboards, video tutorials on chart creation, written guides.
+Action: Pre-built spreadsheet templates, drag-and-drop chart builders.","1. Create a simple Google Sheet tracking a personal habit (e.g., cups of water, pages read)."
 1. AI Leadership,Micro-Credential,"1.1. Fundamentals
-How AI works",I can understand the basic math and science that make generative and agentic AI tools work,,,,,,
+How AI works",I can understand the basic math and science that make generative and agentic AI tools work.,"1. LLMs are pattern predictors, not truth machines.
+2. Prompt quality determines output quality (Garbage In, Garbage Out).
+3. AI has no 'intent' or consciousness; it mimics human language.","1. Is the AI 'thinking' or just predicting?
+2. Why does it hallucinate (lie)?
+3. How does context affect the result?","Explain 'Probability' vs 'Reasoning' in LLMs using the 'autocomplete' analogy.","1. Accurately identifies LLMs as 'next-token predictors'.
+2. Uses the autocomplete analogy correctly.
+3. Mentions that AI does not 'know' facts but retrieves patterns.","Engagement: Hands-on experimentation with different LLM tools (ChatGPT, Gemini, Claude).
+Representation: Visual token prediction animations, written analogies, video explainers.
+Action: Interactive prompt playgrounds, copy-paste examples, voice input.","1. Ask an LLM to complete a common phrase (e.g., 'To be or not...').
+2. Ask it to complete a unique, made-up phrase to see it struggle."
 1. AI Leadership,Micro-Credential,"1.2. Efficiency
-Doing Better Faster",I can use AI on appropriate tasks to do better work in less time with fewer resources.,1. ,,,,"Engagement:
-Representation:
-Action:",
+Doing Better Faster",I can use AI on appropriate tasks to do better work in less time with fewer resources.,"1. AI excels at transformation (Summary, formatting, translation).
+2. AI struggles with original insight and high-stakes accuracy.
+3. The goal is to augment human capability, not replace it.","1. What tasks should I delegate to AI?
+2. How much time did I save?
+3. Is the quality better or worse than if I did it manually?",Take a long article (500+ words) and use AI to summarize it into 3 key takeaways and a formatted table.,"1. Summary captures the main point accurately.
+2. Output format is structured (bullet points/table).
+3. Reflection on time saved vs quality achieved.","Engagement: Choice of content type to summarize (news, technical docs, personal notes).
+Representation: Before/after examples, video walkthroughs, written prompt templates.
+Action: Pre-built prompt libraries, one-click summarization tools.","1. Paste a messy meeting transcript and ask AI to 'Extract action items and format as a checkbox list'."
 1. AI Leadership,Micro-Credential,"1.3. Iteration
-Rapid Revision",I can use AI to generate multiple ideas and improve upon the best.,,,,,"Engagement:
-Representation:
-Action:",
+Rapid Revision",I can use AI to generate multiple ideas and improve upon the best.,"1. The first output is rarely the best output.
+2. You can treat AI like a junior employee: give it feedback to improve.
+3. Iteration with AI is faster than human-only iteration.","1. How can I guide the AI to improve its own work?
+2. What specific feedback changes the result?
+3. Am I settling for 'good enough'?","Generate an email draft, then iterate on it 3 times with different constraints (shorter, more professional, include a joke).","1. Evidence of 3 distinct versions of the artifact.
+2. Prompt history shows directional feedback ('Make it shorter').
+3. Final version is high quality.","Engagement: Choice of revision project (email, essay, code, or creative writing).
+Representation: Side-by-side version comparisons, video iteration demos, written feedback scripts.
+Action: Copy-paste iteration templates, voice-based feedback.","1. Write a prompt. 2. Critique the output. 3. Ask AI to fix the specific issues. Repeat."
 1. AI Leadership,Full Credential,"1.4. Creativity
-Expanding Human Potential","I can use AI to realize & enrich ideas, solutions, and creations that would be difficult to achieve at a human pace.",,,,,"Engagement:
-Representation:
-Action:",
+Expanding Human Potential","I can use AI to realize & enrich ideas, solutions, and creations that would be difficult to achieve at a human pace.","1. AI is a tool for divergent thinking (generating many options).
+2. Human curation is the key to creative value.
+3. Combining disparate ideas is a superpower of LLMs.","1. Can AI be truly creative?
+2. How can I use AI to break through 'writer's block'?
+3. How do I maintain my unique voice?","Brainstorm 20 ideas for a blog post, select the best one, and generate a detailed outline.","1. Volume of ideas (divergent thinking).
+2. Quality of selection (convergent thinking).
+3. Outline structure is coherent and logical.","Engagement: Choice of creative domain (writing, design concepts, business ideas).
+Representation: Visual brainstorm maps, video examples, written prompt chains.
+Action: Bulk idea generation prompts, drag-and-drop idea organizers.","1. 'Mash-up': Ask AI to combine two unrelated concepts (e.g., 'Bakery' and 'Cyberpunk')."
 1. AI Leadership,Full Credential,"1.5. Agency
-Leading Through Change",I can use & improve AI to learn new skills and integrate new tools as human systems evolve.,,,,,"Engagement:
-Representation:
-Action:",
+Leading Through Change",I can use & improve AI to learn new skills and integrate new tools as human systems evolve.,"1. 'Learning how to learn' is the ultimate career skill.
+2. AI acts as a personalized tutor for any subject.
+3. Agency means taking ownership of the outcome, using whatever tools necessary.","1. How can I use AI to teach me something new?
+2. Am I waiting for instructions, or finding solutions?
+3. How do I adapt when the tools change?","Use AI to learn a basic concept in a field you know nothing about (e.g., Quantum Physics, knitting, C++), then explain it back.","1. Demonstration of 'Socratic' prompting (Asking AI to teach/quiz).
+2. Explanation is accurate (verified).
+3. Reflection on the learning process.","Engagement: Choice of learning topic based on personal interest or career goals.
+Representation: AI-generated explanations at multiple levels, video tutorials, written Q&A.
+Action: Interactive quiz generation, voice-based Q&A, step-by-step curriculum builders.","1. 'Explain Like I'm 5' (ELI5) complex topics.
+2. Ask AI to generate a quiz to test your knowledge."
 1. AI Leadership,Full Credential,"1.6. Ethics
-Critical Thinking & Connection","I can use AI to help all of Creation thrive by improving lives, communities, and our environment.",,,,,"Engagement:
-Representation:
-Action:",
-2. WordPress,Micro-Credential,2.1. WordPress Production,I can create professional web content using WordPress.,,,,,"Engagement:
-Representation:
-Action:",
-2. WordPress,Micro-Credential,"2.2. LLM Production
-",I can create professional work using LLM clients.,,,,,"Engagement:
-Representation:
-Action:",
-2. WordPress,Full Credential,2.3. UI Production,I can create effective User Interfaces for professional applications,,,,,"Engagement:
-Representation:
-Action:",
+Critical Thinking & Connection","I can use AI to help all of Creation thrive by improving lives, communities, and our environment.","1. AI reflects the biases of its training data.
+2. We are responsible for the outputs we generate and share.
+3. Technology should serve human flourishing, not diminish it.","1. Whose voice is missing from this AI output?
+2. Is this use of AI honest and transparent?
+3. What is the environmental cost of this query?","Analyze a generated text for potential bias or inaccuracies. Propose an ethical framework for AI use in your field.","1. Identification of potential bias (gender, cultural, etc.).
+2. Transparency (disclosing AI use).
+3. Critical thinking about source/attribution.","Engagement: Choice of ethical scenario relevant to personal industry or interests.
+Representation: Case studies, video discussions, written ethical frameworks.
+Action: Bias audit checklists, disclosure templates, group discussion guides.","1. Ask AI to generate an image of a 'CEO' and observe the gender/race bias.
+2. Discuss: Should students use AI for essays?"
+2. WordPress,Micro-Credential,2.1. WordPress Production,I can create professional web content using WordPress.,"1. WordPress powers over 40% of the web; it is the standard for content management.
+2. The Block Editor (Gutenberg) allows for modular design without code.
+3. Content structure (Headings, Paragraphs) matters for both readers and SEO.","1. Is this a Page (static) or a Post (timely)?
+2. How do I make this layout engaging?
+3. Is my content accessible?","Create a blog post with a specific structure (H1, H2, Image, Quote) and publish it.","1. Use of Blocks (Image, Quote, Columns).
+2. Correct Heading hierarchy (H1 -> H2 -> H3).
+3. Successful publication (View live link).","Engagement: Choice of post topic and layout style.
+Representation: Video tutorials, written guides with screenshots, interactive block demos.
+Action: Pre-built block patterns, drag-and-drop editing, keyboard navigation.","1. Create an 'About Me' page using a pre-made detailed layout pattern."
+2. WordPress,Micro-Credential,"2.2. LLM Production",I can create professional work using LLM clients to accelerate content creation.,"1. AI can draft content 10x faster than humans.
+2. AI content requires human editing regarding tone, fact-checking, and SEO.
+3. The 'Human Sandwich' method ensures quality.","1. Does this sound like a robot wrote it?
+2. Is the SEO strategy sound?
+3. How do I prompt for a specific voice?","Use AI to generate a full blog post about a niche topic, edit it for human tone, and format it for WordPress.","1. Content is coherent and on-topic.
+2. No obvious 'AI-isms' (e.g., 'In conclusion', 'delve', overly flowery language).
+3. Correct use of keywords for SEO.","Engagement: Choice of content niche and target audience.
+Representation: Before/after editing examples, video editing walkthroughs, AI-ism checklists.
+Action: Copy-paste prompt templates, SEO keyword tools, tone adjustment prompts.","1. 'Tone Transfer': Take a dry AI paragraph and ask it to rewrite it 'witty and sarcastic'."
+2. WordPress,Full Credential,2.3. UI Production,I can create effective User Interfaces for professional applications.,"1. Good design is invisible; it helps users achieve their goals without friction.
+2. Hierarchy (Typography, Spacing) guides the eye.
+3. Accessibility is a requirement, not a feature.","1. Where do I want the user to look first?
+2. Is this text legible on a phone?
+3. Can a screen reader navigate this page?","Critique a webpage design (screenshot provided or self-selected) based on Hierarchy, Contrast, and Alignment.","1. Correct identification of design principles (or lack thereof).
+2. Suggestions for improvement are actionable.
+3. Consideration of mobile/responsive layout.","Engagement: Choice of website to critique based on personal interest.
+Representation: Annotated design examples, video critiques, written design principle guides.
+Action: Screenshot annotation tools, design audit checklists, accessibility checkers.","1. 'The Squint Test': Squint at a page. What stands out? It should be the most important thing."
 2. WordPress,Full Credential,"2.4. Full Stack Development
-PHP, Python, & JavaScript","I can create Full Stack products using PHP, Python, or JavaScript including debugging my code & cleaning my data.",,,,,"Engagement:
-Representation:
-Action:",
-2. WordPress,Full Credential,2.5. AI Enablement,"I can help a team adopt, scale, and implement new AI tools to improve team outcomes.",,,,,"Engagement:
-Representation:
-Action:",
-3. Success Skills,Micro-Credential,3.1. Resume & Digital Portfolio,I can create a compelling personal brand to help me earn the opportunities I seek,,,Produce or update your resume & digital portfolio using at least one AI tool,,"Engagement:
-Representation:
-Action:",
-3. Success Skills,Full Credential,3.2. Compensation & Living Wages,I can plan and advocate for Living Wages that help me realize my lifestyle goals,,,"Backwards plan your living wage requirements for today, 3 years, and 5 years from now to provide for a target lifestyle",,"Engagement:
-Representation:
-Action:",
-3. Success Skills,Full Credential,3.3. Networking & Advocacy,I can connect with professional peers and mentors and use those connections to realize my career goals,,,,,"Engagement:
-Representation:
-Action:",
-3. Success Skills,Full Credential,3.4. Healthy Conflict,I can navigate multiple types of conflict in healthy ways that help me realize positive outcomes,,,,,"Engagement:
-Representation:
-Action:",
-3. Success Skills,Full Credential,3.5. Presenting & Storytelling,I can present myself and my work in ways that are clear and compelling,,,,,"Engagement:
-Representation:
-Action:",
+PHP, Python, & JavaScript","I can create Full Stack products using PHP, Python, or JavaScript including debugging my code & cleaning my data.","1. The web is built on HTML (Structure), CSS (Style), and JS (Interactivity).
+2. WordPress runs on PHP (Server-side logic).
+3. Viewing Source/Inspecting Elements reveals the matrix.","1. Is this a browser issue (Client) or a server issue (Backend)?
+2. How do I customize something the theme doesn't support?
+3. How do I debug a white screen of death?","Use the browser inspector to change the color of a button on a live site, take a screenshot, and explain the CSS used.","1. Correct identification of the element class/ID.
+2. Valid CSS syntax (e.g., color: red;).
+3. Understanding that client-side changes are temporary.","Engagement: Choice of website and element to modify.
+Representation: Video inspector tutorials, written CSS guides, interactive code playgrounds.
+Action: Copy-paste code snippets, browser extensions for CSS editing, AI code explanations.","1. 'Hack the Web': Go to Google.com. Change the button text to say your name using Inspector."
+2. WordPress,Full Credential,2.5. AI Enablement,"I can help a team adopt, scale, and implement new AI tools to improve team outcomes.","1. Technology is easy; adoption behavior is hard.
+2. Automating workflows (Zapier/Make) scales impact.
+3. Integrating AI into the CMS brings intelligence to the content source.","1. Where is the friction in our workflow?
+2. Can we automate this repetitive task?
+3. How do I teach my team to use this tool?","Propose an automation workflow (e.g., 'When a form is submitted -> Email is sent -> Data adds to Sheet').","1. Workflow has a clear Trigger (Start).
+2. Workflow has a clear Action (End).
+3. Logic is sound and feasible.","Engagement: Choice of workflow scenario relevant to personal or team needs.
+Representation: Workflow diagram examples, video automation tutorials, written logic guides.
+Action: Pre-built Zap templates, drag-and-drop workflow builders, AI workflow suggestions.","1. Explore Zapier.com. Look at 'Popular Zaps' for inspiration."
+3. Success Skills,Micro-Credential,3.1. Resume & Digital Portfolio,I can create a compelling personal brand to help me earn the opportunities I seek.,"1. A resume gets you the interview; the portfolio gets you the job.
+2. Applicant Tracking Systems (ATS) scan for keywords before humans see your resume.
+3. Your digital presence is your 24/7 advocate.","1. Does a stranger know what I can do in 6 seconds?
+2. Is my portfolio accessible and updated?
+3. Am I tailoring my resume to the specific job?",Produce or update your resume & digital portfolio using at least one AI tool.,"1. Resume is ATS-friendly (clean format, keywords).
+2. Portfolio link is live and responsive.
+3. Content focuses on outcomes/impact ('Increased X by Y%') rather than just duties.","Engagement: Choice of portfolio platform (LinkedIn, WordPress, GitHub, Notion).
+Representation: Resume templates, video portfolio reviews, written ATS optimization guides.
+Action: AI resume critique tools, keyword matching assistants, portfolio builders.","1. 'Roast my Resume': Ask AI to critique your resume against a specific job description."
+3. Success Skills,Full Credential,3.2. Compensation & Living Wages,I can plan and advocate for Living Wages that help me realize my lifestyle goals.,"1. Your salary should reflect the value you provide, not the hours you work.
+2. A 'Living Wage' is different from a 'Minimum Wage'.
+3. Negotiation is a collaborative problem-solving process, not a battle.","1. What is the market rate for my skills?
+2. What do I actually need to earn to live the life I want?
+3. How do I ask for more without risking the offer?","Backwards plan your living wage requirements for today, 3 years, and 5 years from now to provide for a target lifestyle.","1. Accurate calculation of monthly expenses (Rent, Food, Savings).
+2. Realistic research on market rates for target roles.
+3. Clear 3-step plan to bridge the gap.","Engagement: Personalized budget based on individual location and lifestyle goals.
+Representation: Budget calculators, video negotiation role-plays, written salary research guides.
+Action: Pre-built budget templates, salary comparison tools, negotiation script generators.","1. Use the MIT Living Wage Calculator to find data for your area."
+3. Success Skills,Full Credential,3.3. Networking & Advocacy,I can connect with professional peers and mentors and use those connections to realize my career goals.,"1. Your network is your net worth.
+2. The best networking comes from 'Giving First' (adding value to others).
+3. Weak ties (acquaintances) are often more valuable for job hunting than strong ties (close friends).","1. Who knows what I am capable of?
+2. How can I be helpful to people in my industry?
+3. How do I maintain relationships without being annoying?","Draft an outreach message to a potential mentor or peer using the 'Warm Email' structure.","1. Subject line is clear and relevant.
+2. Message establishes common ground.
+3. Ask is specific and low-friction (e.g., '15 min chat' not 'Give me a job').","Engagement: Choice of networking platform and outreach style.
+Representation: Email templates, video networking tips, written relationship-building guides.
+Action: LinkedIn connection tools, email draft assistants, follow-up reminder systems.","1. LinkedIn Audit: Connect with 5 people who have the job you want."
+3. Success Skills,Full Credential,3.4. Healthy Conflict,I can navigate multiple types of conflict in healthy ways that help me realize positive outcomes.,"1. Conflict is inevitable and necessary for innovation.
+2. Focus on the problem, not the person.
+3. Psychological safety is the foundation of high-performing teams.","1. Am I seeking to understand, or just to win?
+2. How does my body react to conflict?
+3. What is the 'Shared Goal' we both agree on?","Script a response to a difficult workplace scenario using 'I' statements and the SBI (Situation-Behavior-Impact) model.","1. Uses specific, objective facts (Situation).
+2. Describes behavior without labeling the person (Behavior).
+3. Explains the consequence clearly (Impact).","Engagement: Choice of conflict scenario relevant to personal experience.
+Representation: Role-play videos, written SBI examples, audio-guided de-escalation.
+Action: Script templates, practice partner matching, feedback forms.","1. Roleplay: A teammate missed a deadline that affected your work. Address it."
+3. Success Skills,Full Credential,3.5. Presenting & Storytelling,I can present myself and my work in ways that are clear and compelling.,"1. Facts tell, stories sell.
+2. You are not the hero of the story; the audience is.
+3. Visuals should support the speaker, not replace them.","1. What do I want the audience to feel, think, and do?
+2. What is the 'Conflict' in this story?
+3. Is this presentation simple enough?",Create a 3-slide pitch deck outline for a project or idea.,"1. Clear narrative arc (Problem -> Agitation -> Solution).
+2. Minimal text on slides (Focus on visuals).
+3. Strong Call to Action (CTA) at the end.","Engagement: Choice of presentation topic and audience.
+Representation: Pitch deck examples, video presentation analysis, written storytelling frameworks.
+Action: Slide templates, presentation timers, AI slide generators.","1. Watch a Steve Jobs keynote. Notice how little text is on the screen."
