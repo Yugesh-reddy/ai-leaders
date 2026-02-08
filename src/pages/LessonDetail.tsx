@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
 import LessonAssessment from '../components/LessonAssessment';
 import LessonChat from '../components/LessonChat';
 
@@ -70,8 +71,8 @@ const LessonDetail: React.FC = () => {
                 <div className="mb-8">
                     <span className="text-sm text-purple-400 font-semibold">{lesson.domain.replace(/^\d+\.\s*/, '')} &bull; {lesson.id}</span>
                     <h1 className="text-4xl font-bold mt-2 mb-4">{lesson.title}</h1>
-                    <div className="prose prose-invert prose-lg max-w-none">
-                        <ReactMarkdown>{lesson.content}</ReactMarkdown>
+                    <div className="prose prose-invert prose-lg max-w-none prose-table:border-collapse prose-th:border prose-th:border-white/20 prose-th:p-2 prose-th:bg-white/5 prose-td:border prose-td:border-white/20 prose-td:p-2">
+                        <ReactMarkdown remarkPlugins={[remarkGfm]}>{lesson.content}</ReactMarkdown>
                     </div>
                 </div>
 
